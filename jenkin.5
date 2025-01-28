@@ -1,0 +1,100 @@
+Assignment 5 base in pipline 
+
+add script 
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Explicitly check out the code from the specified Git repository
+                git branch: 'main', url: 'git@github.com:Vinodbhatt76/example-repo.git'
+            }
+        }
+        stage('Run Scans in Parallel') {
+            parallel {
+                stage('Static Code Analysis') {
+                    steps {
+                        // Add your static code analysis commands here
+                        echo 'Running static code analysis...'
+                    }
+                }
+                stage('Security Scans') {
+                    steps {
+                        // Add your security scan commands here
+                        echo 'Running security scans...'
+                    }
+                }
+            }
+        }
+        stage('Code Stability') {
+            steps {
+                // Add your code stability checks here
+                echo 'Checking code stability...'
+            }
+        }
+        stage('Code Quality Analysis') {
+            steps {
+                // Add your code quality analysis commands here
+                echo 'Analyzing code quality...'
+            }
+        }
+        stage('Code Coverage Analysis') {
+            steps {
+                // Add your code coverage analysis commands here
+                echo 'Analyzing code coverage...'
+            }
+        }
+        stage('Generate Reports') {
+            steps {
+                // Add your report generation commands here
+                echo 'Generating reports...'
+            }
+        }
+        stage('Approval for Publish') {
+            steps {
+                // Add your approval steps here
+                echo 'Waiting for approval to publish...'
+            }
+        }
+        stage('Publish Artifacts') {
+            steps {
+                // Add your artifact publishing commands here
+                echo 'Publishing artifacts...'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up...'
+            // Add any cleanup steps here
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+} 
+
+        Stages:
+        ◦ Checkout: Pulls the code from a Git repository (main branch).
+        ◦ Run Scans in Parallel:
+            ▪ Static code analysis.
+            ▪ Security scans.
+        ◦ Code Stability: Verifies code robustness.
+        ◦ Code Quality Analysis: Assesses code quality metrics.
+        ◦ Code Coverage Analysis: Checks the test coverage of the codebase.
+        ◦ Generate Reports: Prepares reports based on the analyses.
+        ◦ Approval for Publish: Waits for a manual approval step before proceeding to publishing.
+        ◦ Publish Artifacts: Publishes the build artifacts to a specified location or repository.
+       2. Parallel Execution:
+        ◦ Scans (Static code analysis and security scans) are executed in parallel to save time.
+       3. Post-Execution Steps:
+        ◦ Always: Cleanup tasks after the pipeline's execution.
+        ◦ Success: Message indicating successful pipeline completion.
+        ◦ Failure: Message indicating pipeline failure.
+         Suggestions for Improvement
+      
+
